@@ -1,0 +1,41 @@
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="/public/images/logo.png" alt="">
+          </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item me-5">
+              <a class="nav-link active" href="/">HOME</a>
+            </li>
+            {{#if isLogin}}
+            <li class="nav-item me-5">
+              <a class="nav-link active" href="#cars">SERVICES</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link active"  href="/car/car">CARS</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link active"  href="/car/brand">BRAND</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link active"  href="/car/type">TYPE</a>
+            </li>
+            <li class="nav-item me-5">
+              <a class="nav-link active"  href="/car/rent">RENT</a>
+            </li>
+
+            <li class="nav-item me-5 py-2">
+              <a class="btn-start px-3 py-2" href="/logout">LOGOUT</a>
+            </li>
+            {{else}}
+            <li class="nav-item me-3 py-2">
+              <a class="btn-start px-5 py-2" href="/login">START</a>
+            </li>
+            {{/if}}
+          </ul>
+        </div>
+        </div>
+      </nav>
+    </header>

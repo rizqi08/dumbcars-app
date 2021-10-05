@@ -1,0 +1,34 @@
+{{> header}}
+{{> navbar}}
+
+  <div class="album py-5" style="margin-left: 300px; ">
+    <div class="container" >
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 white">
+
+        <div class="col" style="width:700px;" >
+          <div class="card shadow-sm">
+            <img src='{{car.photo}}' alt='' class='list-thumbnail'/>
+
+            <div class="card-body">
+              <p class="card-text">No : {{car.id}}</p>
+              <p class="card-text">Name : {{car.name}}</p>
+              <p class="card-text">Plat Number : {{car.plat_number}}</p>
+              <p class="card-text">Price : {{car.price}}</p>
+              <p class="card-text">Status : {{car.status}}</p>
+              <p class="card-text">Brand : {{car.brand_id}}</p>
+              <p class="card-text">Type : {{car.type_id}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="/car/addRent" class="btn btn-sm btn-primary">Rent Now</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{{> footer}}

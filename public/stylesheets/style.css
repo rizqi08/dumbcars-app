@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    background: #DFDCDC !important;
+}
+
+.navbar-brand img {
+    height: 30px;
+    margin-left: 30px;
+}
+
+.nav-item .nav-link {
+    color: #FF4A4A;
+    font-family: Madeeta;
+    font-size: 20px;
+  }
+
+.nav-item .btn-start{
+  background: #FF4A4A;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.home {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background: url(/public/images/bg1.png);
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: cover;
+}
+
+.text {
+    padding-top: 150px;
+    padding-left: 50px;
+}
+
+.text h4 {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.text h1 span {
+    color: #FF4A4A;
+}
+
+.text p {
+  font-size: 16px;
+  font-weight: 350;
+  margin-top: 0;
+}
+
+.heading {
+    text-align: center;
+    margin-top: 70px;
+  }
+  .heading span {
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .heading h1 {
+    font-size: 2rem;
+  }
+
+.ride-container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    gap: 1rem;
+    margin-top: 50px;
+  }
+
+  .ride-container .box {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .ride-container .box img {
+      width: 45px;
+      height: 45px;
+  }
+
+  .cars-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px 70px 0 70px;
+  }
+  .cars-container .box {
+    padding: 10px;
+    margin: 20px;
+    border-radius: 1rem;
+    box-shadow: 1px 4px 41px rgba(0, 0, 0, 0.1);
+  }
+  .cars-container .box .box-img {
+    width: 100%;
+    height: 200px;
+  }
+
+.cars-container .box .box-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  object-fit: cover;
+  object-position: center;
+}
+.cars-container .box p {
+  padding: 0 10px;
+  border: 1px solid black;
+  width: 58px;
+  border-radius: 0.5rem;
+  margin: 1rem 0 1rem;
+}
+.cars-container .box h3 {
+  font-weight: 500;
+}
+.cars-container .box h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: black;
+  margin: 0.2rem 0 0.5rem;
+}
+.cars-container .box h2 span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: black;
+}
+.cars-container .box .btn {
+  display: flex;
+  justify-content: center;
+  background: #FF4A4A;
+  color: #fff;
+  padding: 10px;
+  border-radius: 0.5rem;
+}
+.cars-container .box .btn:hover {
+    background: rgb(253, 139, 139);
+}
+
+.form-signin .btn-success {
+  background-color: #FF4A4A !important;
+  border: none;
+}
+
+footer {
+    background: #9D9A9A;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+}

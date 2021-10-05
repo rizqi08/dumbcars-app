@@ -1,0 +1,107 @@
+{{> header}}
+{{> navbar}}
+    <div class="home" id="home">
+      <div class="text">
+        <h4>WELCOME TO DUMBCARS</h4>
+        <h1>BOOK A<span> CAR TODAY!</span><br>SAVE UP TO 30%</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>
+        Reiciendis dolore magni assumenda debitis,</p>
+      </div>
+    </div>
+
+    <div class="ride" id="ride">
+        <div class="heading">
+            <span>How Its Work</span>
+            <h1>Rent With 3 Easy Steps</h1>
+        </div>
+        <div class="ride-container">
+            <div class="box">
+                <img src="/public/images/icon/loc.png">
+                <h2>Choose A Location</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt quis, quia exercitationem dolores assumenda doloribus?</p>
+            </div>
+
+            <div class="box">
+                <img src="/public/images/icon/pick.png">
+                <h2>Pick-Up Date</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt quis, quia exercitationem dolores assumenda doloribus?</p>
+            </div>
+
+            <div class="box">
+                <img src="/public/images/icon/book.png">
+                <h2>Book A Car</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt quis, quia exercitationem dolores assumenda doloribus?</p>
+            </div>
+        </div>
+    </div>
+
+        <div class="cars" id="cars">
+        <div class="heading">
+            <span>Best Services</span>
+            <h1>Explore Out Top Deals <br> From Top Rated Dealers</h1>
+        </div>
+        <div class="cars-container">
+            {{#each car}}
+            <div class="box">
+                <div class="box-img">
+                    <img src="{{this.photo}}" alt="">
+                </div>
+                {{!-- <p>2017</p> --}}
+                <h3>{{this.name}}</h3>
+                {{!-- <h2>$58500 | $358 <span>/month</span></h2> --}}
+                <a href="/car/carDetail/{{this.id}}" class="btn">View Detail</a>
+            </div>
+            {{/each}}
+
+            {{!-- <div class="box">
+                <div class="box-img">
+                    <img src="/public/images/car2.jpg" alt="">
+                </div>
+                <p>2017</p>
+                <h3>2018 Honda Civic</h3>
+                <h2>$58500 | $358 <span>/month</span></h2>
+                <a href="/car/carDetail/:id" class="btn">View Detail</a>
+            </div>
+
+            <div class="box">
+                <div class="box-img">
+                    <img src="/public/images/car3.jpg" alt="">
+                </div>
+                <p>2017</p>
+                <h3>2018 Honda Civic</h3>
+                <h2>$58500 | $358 <span>/month</span></h2>
+                <a href="/car/carDetail/:id" class="btn">View Detail</a>
+            </div>
+
+            <div class="box">
+                <div class="box-img">
+                    <img src="/public/images/car4.jpg" alt="">
+                </div>
+                <p>2017</p>
+                <h3>2018 Honda Civic</h3>
+                <h2>$58500 | $358 <span>/month</span></h2>
+                <a href="/car/carDetail/:id" class="btn">View Detail</a>
+            </div>
+
+            <div class="box">
+                <div class="box-img">
+                    <img src="/public/images/car5.jpg" alt="">
+                </div>
+                <p>2017</p>
+                <h3>2018 Honda Civic</h3>
+                <h2>$58500 | $358 <span>/month</span></h2>
+                <a href="/car/carDetail/:id" class="btn">View Detail</a>
+            </div>
+
+            <div class="box">
+                <div class="box-img">
+                    <img src="/public/images/car6.jpg" alt="">
+                </div>
+                <p>2017</p>
+                <h3>2018 Honda Civic</h3>
+                <h2>$58500 | $358 <span>/month</span></h2>
+                <a href="/car/carDetail/:id" class="btn">View Detail</a>
+            </div> --}}
+        </div>
+    </div>
+{{> footer}}
