@@ -1,5 +1,5 @@
 {{> header}}
-{{> navbar}}
+{{> navbarAdmin}}
     <div class="home" id="home">
       <div class="text">
         <h4>WELCOME TO DUMBCARS</h4>
@@ -50,7 +50,6 @@
                 <h3>{{this.name}}</h3>
                 {{!-- <h2>$58500 | $358 <span>/month</span></h2> --}}
                 <a href="/car/carDetail/{{this.id}}" class="btn">View Detail</a>
-                <a href="/car/addRent/{{this.id}}" class="btn btn-primary" style="background-color: rgb(87, 87, 209);">Rent Now</a>
             </div>
             {{/each}}
 

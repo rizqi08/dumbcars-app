@@ -1,6 +1,6 @@
 {{> header}}
-{{> navbar}}
-<div class="container pt-5 mb-5">
+{{> navbarAdmin}}
+{{!-- <div class="container pt-5 mb-5">
     <form action="/car/addRent" method="POST">
         <h1 class="h3 mb-3 fw-bold">Add Rent</h1>
         <div class="mb-3">
@@ -26,14 +26,37 @@
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
-</div>
+</div> --}}
 
-{{!-- <script>
-    function handleChange(){
-        const element = document.getElementById('preview');
-        const value = URL.createObjectURL(event.target.files[0]);
-        console.log(value);
-        element.innerHTML = `<img src="${value}" style="width:250px;" class="mt-3">`;
-    }
-</script> --}}
+<div class="container pt-5 pb-3">
+    <form action="/car/addRent" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="car_id" id="car_id" value="{{car.id}}">
+        <h1 class="h3 mb-3 fw-bold">{{title}}</h1>
+        <div class="mb-3">
+            <label for="name" class="form-label">Car Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Input Car name" value="{{car.name}}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="plat_number" class="form-label">Plat Number</label>
+            <input type="text" class="form-control" name="plat_number" id="plat_number" value="{{car.plat_number}}" placeholder="Input plat number" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" class="form-control" name="price" id="price" value="{{car.price}}" placeholder="Input Price" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="borrow_date" class="form-label">Borrow Date</label>
+            <input type="date" class="form-control" name="borrow_date" id="borrow_date" required>
+        </div>
+        <div class="mb-3">
+            <label for="return_date" class="form-label">Return Date</label>
+            <input type="date" class="form-control" name="return_date" id="return_date" required>
+        </div>
+        <div class="mb-3">
+            <label for="sub_total" class="form-label">Subtotal</label>
+            <input type="number" class="form-control" name="sub_total" id="sub_total" placeholder="Input Subtotal" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
 {{> footer}}

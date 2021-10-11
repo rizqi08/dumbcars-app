@@ -1,10 +1,10 @@
 {{> header}}
-{{> navbar}}
+{{> navbarAdmin}}
 
 <div class="container m-genre">
 <div class="d-flex flex-row justify-content-between mar-bot">
     <h1 class="fw-bold">Rent Car.</h1>
-<button class="btn btn-primary text-uppercase btn-sm-lg" style="height: 40px !important;"><a href="/car/addRent" class="text-decoration-none text-light">Add data</a></button>
+{{!-- <button class="btn btn-primary text-uppercase btn-sm-lg" style="height: 40px !important;"><a href="/car/addRent" class="text-decoration-none text-light">Add data</a></button> --}}
 </div>
 <hr>
     <table class="table table-striped table-hover border">
@@ -14,7 +14,8 @@
         <th scope="col">Borrow</th>
         <th scope="col">Return</th>
         <th scope="col">Subtotal</th>
-        <th scope="col">Car</th>
+        <th scope="col">User_id</th>
+        <th scope="col">Car_id</th>
         <th scope="col">Control</th>
         </tr>
     </thead>
@@ -25,6 +26,7 @@
             <td>{{this.borrow_date}}</td>
             <td>{{this.return_date}}</td>
             <td>{{this.sub_total}}</td>
+            <td>{{this.user_id}}</td>
             <td>{{this.car_id}}</td>
             <td>
                 <div class="text-start">

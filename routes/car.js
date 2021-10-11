@@ -35,6 +35,13 @@ router.get('/carDetail/:id', function(request, response){
           isLogin: request.session.isLogin,
           car,
       });
+
+      // if(request.session.isAdmin) {
+      //   response.render('car/detail', {
+      //     title,
+      //     isAdmin: request.session.isAdmin,
+      //     car,
+      // });
       });
     });
 });
@@ -120,16 +127,28 @@ router.get('/addCar', function(request, response) {
             type = false;
           }
 
-          response.render('car/addCar', {
-            title,
-            isLogin: request.session.isLogin,
-            brand,
-            type,
-          });
+          // response.render('car/addCar', {
+          //   title,
+          //   isLogin: request.session.isLogin,
+          //   brand,
+          //   type,
+          // });
+
+        if(request.session.isAdmin) {
+        response.render('car/addCar', {
+          title,
+          isAdmin: request.session.isAdmin,
+          brand,
+          type,
+        }); 
+      } else {
+        response.redirect('/login')
+      }
 
         });
       });
-    });
+    })
+    // conn.release();
   });
 });
 
@@ -222,13 +241,24 @@ router.get('/editCar/:id', function (request, response) {
                   type = false;
                 }
   
-                response.render('car/editCar', {
-                  title,
-                  isLogin: request.session.isLogin,
-                  car,
-                  brand,
-                  type,
-                });
+                // response.render('car/editCar', {
+                //   title,
+                //   isLogin: request.session.isLogin,
+                //   car,
+                //   brand,
+                //   type,
+                // });
+
+                if(request.session.isAdmin) {
+                  response.render('car/editCar', {
+                    title,
+                    isAdmin: request.session.isAdmin,
+                    brand,
+                    type,
+                  }); 
+                } else {
+                  response.redirect('/login')
+                }
   
               });
             });
@@ -298,11 +328,22 @@ router.get('/brand', function(request,response){
         brands = false
       }
 
-      response.render('car/brand', {
-        title,
-        isLogin: request.session.isLogin,
-        brands,
-      });
+      // response.render('car/brand', {
+      //   title,
+      //   isLogin: request.session.isLogin,
+      //   brands,
+      // });
+
+      if(request.session.isAdmin) {
+        response.render('car/brand', {
+          title,
+          isAdmin: request.session.isAdmin,
+          brands,
+        }); 
+      } else {
+        response.redirect('/login')
+      }
+
     conn.release();
     });
   });
@@ -311,10 +352,19 @@ router.get('/brand', function(request,response){
 // render add brand
 router.get('/addBrand', function(request,response) {
     const title = 'Add Brand';
-    response.render('car/addBrand', {
-      title,
-      isLogin: request.session.isLogin,
-    });
+    // response.render('car/addBrand', {
+    //   title,
+    //   isLogin: request.session.isLogin,
+    // });
+
+    if(request.session.isAdmin) {
+      response.render('car/addBrand', {
+        title,
+        isAdmin: request.session.isAdmin,
+      }); 
+    } else {
+      response.redirect('/login')
+    }
   });
 
 router.post('/addBrand', function(request,response) {
@@ -360,11 +410,22 @@ router.get('/editBrand/:id', function (request, response) {
         ...results[0],
       };
 
-      response.render('car/editBrand', {
-        title,
-        isLogin: request.session.isLogin,
-        brand,
-      });
+      // response.render('car/editBrand', {
+      //   title,
+      //   isLogin: request.session.isLogin,
+      //   brand,
+      // });
+
+      if(request.session.isAdmin) {
+        response.render('car/editBrand', {
+          title,
+          isAdmin: request.session.isAdmin,
+          brand,
+        }); 
+      } else {
+        response.redirect('/login')
+      }
+
     });
     conn.release();
   });
@@ -422,11 +483,22 @@ router.get('/type', function(request,response){
         types = false
       }
 
-      response.render('car/type', {
-        title,
-        isLogin: request.session.isLogin,
-        types,
-      });
+      // response.render('car/type', {
+      //   title,
+      //   isLogin: request.session.isLogin,
+      //   types,
+      // });
+
+      if(request.session.isAdmin) {
+        response.render('car/type', {
+          title,
+          isAdmin: request.session.isAdmin,
+          types,
+        }); 
+      } else {
+        response.redirect('/login')
+      }
+
     conn.release();
     });
   });
@@ -435,10 +507,19 @@ router.get('/type', function(request,response){
 // render add Type
 router.get('/addType', function(request,response) {
     const title = 'Dumbcars';
-    response.render('car/addType', {
-      title,
-      isLogin: request.session.isLogin,
-    });
+    // response.render('car/addType', {
+    //   title,
+    //   isLogin: request.session.isLogin,
+    // });
+
+    if(request.session.isAdmin) {
+      response.render('car/editType', {
+        title,
+        isAdmin: request.session.isAdmin,
+      }); 
+    } else {
+      response.redirect('/login')
+    }
   });
 
 router.post('/addType', function(request, response){
@@ -484,11 +565,21 @@ router.get('/editType/:id', function (request, response) {
           ...results[0],
         };
   
-        response.render('car/editType', {
-          title,
-          isLogin: request.session.isLogin,
-          type,
-        });
+        // response.render('car/editType', {
+        //   title,
+        //   isLogin: request.session.isLogin,
+        //   type,
+        // });
+
+        if(request.session.isAdmin) {
+          response.render('car/editType', {
+            title,
+            isAdmin: request.session.isAdmin,
+            type,
+          }); 
+        } else {
+          response.redirect('/login')
+        }
       });
       conn.release();
     });
@@ -541,6 +632,7 @@ router.get('/rent', function(request,response) {
           borrow_date: result.borrow_date,
           return_date: result.return_date,
           sub_total: result.sub_total,
+          user_id: result.user_id,
           car_id: result.car_id,
         });
       }
@@ -549,76 +641,152 @@ router.get('/rent', function(request,response) {
         rent = false
       }
 
-      response.render('car/rent', {
-        title,
-        isLogin: request.session.isLogin,
-        rent,
-      });
+      // response.render('car/rent', {
+      //   title,
+      //   isLogin: request.session.isLogin,
+      //   rent,
+      // });
+
+      if(request.session.isAdmin) {
+        response.render('car/rent', {
+          title,
+          isAdmin: request.session.isAdmin,
+          rent,
+        }); 
+      } else {
+        response.redirect('/login')
+      }
     });
     conn.release();
   });
   });
 
 // render table Type
-router.get('/addRent', function(request,response) {
-  const title = 'Add rent';
-  const query = 'SELECT id, name from tb_car';
+// router.get('/addRent', function(request,response) {
+//   const title = 'Add rent';
+//   const query = 'SELECT id, name from tb_car';
+
+//   dbConnection.getConnection(function (err, conn) {
+//     if (err) throw err;
+//     conn.query(query, function (err, results) {
+//       if (err) throw err;
+
+//       let car = [];
+
+//       for (let result of results) {
+//         car.push({
+//           id: result.id,
+//           name: result.name,
+//         });
+//       }
+
+//       if (car.length == 0) {
+//         car = false;
+//       }
+      
+//       response.render('car/addRent', {
+//         title,
+//         car,
+//         isLogin: request.session.isLogin,
+//       });
+
+//       // if(request.session.isAdmin) {
+//       //   response.render('car/addRent', {
+//       //     title,
+//       //     isAdmin: request.session.isAdmin,
+//       //     car,
+//       //   }); 
+//       // } else {
+//       //   response.redirect('/login')
+//       // }
+//     });
+//   });
+//   });
+
+// router.post('/addRent', function(request, response){
+//     const {borrow_date, return_date, sub_total, car_id} = request.body;
+  
+//     if(borrow_date == '' || return_date == '' || sub_total == '' || car_id == '') {
+//       request.session.message = {
+//         type: 'danger',
+//         message: 'Please input all the field!',
+//       };
+//       return response.redirect('/car/addRent');
+//     } 
+  
+//     const query = `INSERT INTO tb_rent (borrow_date, return_date, sub_total, car_id) VALUES ("${borrow_date}", "${return_date}", "${sub_total}", "${car_id}");`;
+  
+//     dbConnection.getConnection(function(err, conn){
+//       if(err) throw err;
+//       conn.query(query, function(err, result){
+//         if(err) throw err;
+  
+//         request.session.message = {
+//           type: 'success',
+//           message: 'Add data success!',
+//         };
+//         response.redirect('/car/rent');
+//       });
+//       conn.release();
+//     });
+//   });
+  
+
+router.get('/addRent/:id', function (request, response) {
+  const title = 'User Rent';
+  const { id } = request.params;
+
+  const query = `SELECT * FROM tb_car WHERE id = ${id}`;
 
   dbConnection.getConnection(function (err, conn) {
     if (err) throw err;
     conn.query(query, function (err, results) {
       if (err) throw err;
 
-      let car = [];
+      const car = {
+        ...results[0],
+        photo: pathFile + results[0].photo,
+      };
 
-      for (let result of results) {
-        car.push({
-          id: result.id,
-          name: result.name,
-        });
-      }
-
-      if (car.length == 0) {
-        car = false;
-      }
-      
       response.render('car/addRent', {
         title,
-        car,
         isLogin: request.session.isLogin,
+        car,
       });
     });
+    conn.release();
   });
-  });
+});
 
-router.post('/addRent', function(request, response){
-    const {borrow_date, return_date, sub_total, car_id} = request.body;
-  
-    if(borrow_date == '' || return_date == '' || sub_total == '' || car_id == '') {
-      request.session.message = {
-        type: 'danger',
-        message: 'Please input all the field!',
-      };
-      return response.redirect('/car/addRent');
-    } 
-  
-    const query = `INSERT INTO tb_rent (borrow_date, return_date, sub_total, car_id) VALUES ("${borrow_date}", "${return_date}", "${sub_total}", "${car_id}");`;
-  
-    dbConnection.getConnection(function(err, conn){
-      if(err) throw err;
-      conn.query(query, function(err, result){
+router.post('/addRent', uploadFile('image'), function (request, response) {
+  const { borrow_date, return_date, sub_total, car_id } = request.body;
+  const query = `UPDATE tb_car SET status = "user" WHERE id = ${car_id}`;
+  const user = request.session.user
+  const user_id = user.id
+  // console.log(query);
+  dbConnection.getConnection(function (err, conn) {
+    if (err) throw err;
+    conn.query(query, function (err, results) {
+      if (err) throw err;
+
+      const queryRent = `INSERT INTO tb_rent (borrow_date, return_date, sub_total, user_id, car_id) VALUES ("${borrow_date}", "${return_date}", "${sub_total}", "${user_id}", "${car_id}");`;
+      dbConnection.getConnection(function(err, conn){
         if(err) throw err;
-  
-        request.session.message = {
-          type: 'success',
-          message: 'Add data success!',
-        };
-        response.redirect('/car/rent');
+        conn.query(queryRent, function(err, result){
+          if(err) throw err;
+
+          request.session.message = {
+            type: 'success',
+            message: 'Add data success!',
+          };
+          response.redirect('/');
+        });
+        conn.release();
       });
-      conn.release();
     });
+    conn.release();
   });
-  
+});
 
 router.get('/editRent/:id', function (request, response) {
     const title = 'Edit rent';
@@ -655,12 +823,23 @@ router.get('/editRent/:id', function (request, response) {
               car = false;  
             }
             
-            response.render('car/editRent', {
-              title,
-              isLogin: request.session.isLogin,
-              rent,
-              car,
-            });
+            // response.render('car/editRent', {
+            //   title,
+            //   isLogin: request.session.isLogin,
+            //   rent,
+            //   car,
+            // });
+
+            if(request.session.isAdmin) {
+              response.render('car/editRent', {
+                title,
+                isAdmin: request.session.isAdmin,
+                rent,
+                car,
+              }); 
+            } else {
+              response.redirect('/login')
+            }
   
           });
         });

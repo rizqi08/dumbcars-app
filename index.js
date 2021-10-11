@@ -3,10 +3,10 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 const session = require('express-session');
+const isLogin = false
 
 const app = express();
 
-const authRoute = require('./routes/auth');
 const carRoute = require('./routes/car');
 
 // import db connection
@@ -49,6 +49,13 @@ app.use(
   })
 );
 
+// session alert
+app.use(function(req,res,next){
+  res.locals.message = req.session.message
+  delete req.session.message
+  next()
+})
+
 // render index page
 app.get("/", function(request, response){
   const title = 'DumbCars'
@@ -74,7 +81,6 @@ app.get("/", function(request, response){
           type_id: result.type_id,
         });
       }
-
       response.render('index', {
         title,
         isLogin: request.session.isLogin,
@@ -86,11 +92,160 @@ app.get("/", function(request, response){
   });
 });
 
+// render index page
+app.get("/admin", function(request, response){
+  const title = 'DumbCars'
+  const query = `SELECT * FROM tb_car`;
+  
+  dbConnection.getConnection((err, conn) => {
+    if(err) throw err;
+
+    conn.query(query, (err, results) => {
+      if (err) throw err;
+
+      let car = [];
+
+      for(let result of results) {
+        car.push({
+          id: result.id,
+          name: result.name,
+          plat_number: result.plat_number,
+          photo: pathFile + result.photo,
+          price: result.price,
+          status: result.status,
+          brand_id: result.brand_id,
+          type_id: result.type_id,
+        });
+      }
+
+      if(request.session.isAdmin) {
+      response.render('dashboard', {
+        title,
+        isAdmin: request.session.isAdmin,
+        car,
+    });
+   }
+
+   else {
+     response.redirect('/login')
+   }
+    });
+    
+    conn.release();
+  });
+});
+
+// render form login
+app.get('/login', function(request,response) {
+  const title = 'Login';
+  response.render('auth/login', {
+    title,
+    isLogin,
+  });
+});
+
+//   login Handler
+app.post('/login', function(request, response){
+  const {email, password} = request.body;
+  const query = `SELECT * FROM tb_user WHERE email = "${email}" AND password = "${password}"`;
+
+  if (email == '' || password == '') {
+      request.session.message = {
+          type: 'danger',
+          message: 'Please insert all field!'
+      }
+      return response.redirect('login');
+  }
+
+  dbConnection.getConnection((err, conn) => {
+      if (err) throw err;
+
+      conn.query(query, function (err, results){
+          if(err) throw err;
+
+          if(results.length === 0){
+              request.session.message = {
+                  type: 'danger',
+                  message: 'Email and password dont match!'
+              };
+              return response.redirect('login');
+
+          } else {
+
+              request.session.isLogin = true;
+              request.session.user = {
+                  id: results[0].id,
+                  email: results[0].email,
+                  status: results[0].status,
+              }
+
+              const user = results[0]
+              let status = user.status
+              request.session.isAdmin = false
+              if (status == "admin") {
+                  request.session.isAdmin = true
+                  response.redirect('/admin')
+              }
+              else if(status == "user") {
+                  request.session.isAdmin = false
+                  response.redirect('/')
+              }
+          }
+      });
+
+      conn.release();
+  });
+});
+
+//   render form register
+app.get('/register', function(request,response) {
+  const title = 'Register';
+  response.render('auth/register', {
+    title,
+    isLogin: request.session.isLogin,
+  });
+});
+
+//handele register
+app.post('/register', function(request, response) {
+  const {email, password, name, no_ktp, address, phone, status} = request.body;
+
+  const query = 'INSERT INTO tb_user(email, password, name, no_ktp, address, phone, status) VALUES (?,?,?,?,?,?,?)';
+  if (email == '' || password == '' || name == '' || no_ktp == '' || address == '' || phone == '' || status == '') {
+      request.session.message = {
+          type: 'danger',
+          message: 'Please insert all field!'
+      }
+      response.redirect('/register');
+      return;
+  }
+
+  dbConnection.getConnection((err, conn) => {
+      if(err) throw err;
+
+      // execute query
+      conn.query(query, [email, password, name, no_ktp, address, phone, status], (err, results) => {
+          if(err) throw err;
+
+          request.session.message = {
+              type: 'success',
+              message: 'Register has successfully!'
+          }
+          response.redirect('/register');
+      });
+      // release connection back to pool
+      conn.release();
+  });
+});
+
+app.get('/logout', function(request,response) {
+  request.session.destroy();
+  response.redirect('/');
+});
+
 // mount car route
 app.use('/car', carRoute);
 
-// mount auth route
-app.use('/', authRoute);
 
 
 const port = 3000;
